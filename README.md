@@ -50,3 +50,41 @@ request 用户注册
 		}
 	}
   ```
+  * request获取客户信息（解决乱码问题）
+    * index.html
+    ```(html)
+    <a href = "/rr/form.html">提交表单</a><br>
+    ```
+    * (servlet)param2.java
+    ```(java)
+    	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/*
+		String name = request.getParameter("username");
+		name=new String(name.getBytes("iso8859-1"),"utf-8");
+		System.out.println("用户名："+name);
+		String psw = request.getParameter("password");
+		System.out.println("密码："+psw);*/
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//doGet(request,response);
+		//*
+		request.setCharacterEncoding("utf-8");
+		String name = request.getParameter("username");
+		System.out.println("用户名："+name);
+		String psw = request.getParameter("password");
+		System.out.println("密码："+psw);
+		// */
+		
+	}
+    ```
+    * (form提交用户信息)form.html
+    ```(html)
+    <body>
+	<form action="/rr/param" method="post">
+		用户名：<input name="username"><br>
+		密码：<input name="password"><br>
+		<input type="submit">
+	</form>
+    </body>
+    ```
